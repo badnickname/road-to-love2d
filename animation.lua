@@ -23,18 +23,29 @@ function Animation:setType(name)
     self.curAnim = name
 end
 
+function Animation:getType()
+    return self.curAnim
+end
+
 function Animation:setSize(w, h)
     self.w = w
     self.h = h
 end
 
+function Animation:isLastFrame()
+    if (self.curFrame == self.type[self.curAnim].rBorder) then
+        return true
+    end
+    return false
+end
+
 function Animation:update()
     local isAnimationEnd = false
+
     if (self.curFrame < self.type[self.curAnim].rBorder) then
         self.curFrame = self.curFrame + 1
     else
         self.curFrame = 0
-        isAnimationEnd = true
     end
     self.frame:setViewport(self.curFrame * self.w,
                            self.type[self.curAnim].pos * self.h,
