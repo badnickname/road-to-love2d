@@ -67,7 +67,17 @@ function Player:update(curTime)
     end
 end
 
+function Player:onKeyPressed(key)
+    -- Shake
+    if (key == "space") then
+        Camera:shake(-0.1)
+    end
+end
+
 function Player:draw()
+    if (Camera.shaked) then
+        love.graphics.print("SHAKED!", self.x - 24, self.y - 32)
+    end
     self.animation:draw(self.x, self.y, self.angle,
                         self.xscale, self.yscale, self.xpos, self.ypos)
 end
